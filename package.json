@@ -1,0 +1,25 @@
+{
+  "fitbit": {
+    "appUUID": "76464fd4-485d-4a1e-80e8-ffdb40f6ff9a",
+    "appType": "clockface",
+    "appDisplayName": "ReadableStats2",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [
+      "access_activity",
+      "access_heart_rate"
+    ],
+    "buildTargets": [
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "ReadableStats2"
+      }
+    },
+    "defaultLanguage": "en-US"
+  },
+  "devDependencies": {
+    "@fitbit/sdk": "~3.1.0"
+  }
+}

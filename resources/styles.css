@@ -1,0 +1,95 @@
+.baseSettings {
+  fill: white;
+  text-length: 32;
+  text-anchor: middle;
+  font-family: Seville-Condensed;
+}
+
+.smallestFont {
+  fill: white;
+  text-length: 32;
+  text-anchor: middle;
+  font-size: 20;
+  font-family: Seville-Bold;
+}
+
+.smallFont {
+  font-size: 28;
+  font-family: Seville-Bold;
+  fill: linen;
+}
+
+.clock-display {
+  font-family: Colfax-Bold;
+  fill: white;
+  font-size: 55;
+  text-anchor: start;
+}
+
+.clock-displayH {
+  font-family: Colfax-Bold;
+  fill: white;
+  font-size: 80;
+  text-anchor: middle;
+}
+
+.clock-displayM {
+  font-family: Colfax-Bold;
+  fill: white;
+  font-size: 80;
+  text-anchor: middle;
+}
+
+.clock-displayS {
+  font-family: Colfax-Bold;
+  fill: khaki;
+  font-size: 55;
+  text-anchor: start;
+}
+
+.clock-display12h {
+  font-family: Colfax-Bold;
+  fill: linen;
+  font-size: 28;
+  text-anchor: start;
+}
+
+.clock-display1 {
+  font-family: Colfax-Bold;
+  fill: grey;
+  font-size: 35;
+  text-anchor: middle;
+}
+
+.clock-display2 {
+  font-family: Colfax-Bold;
+  fill: lightgrey;
+  font-size: 30;
+  text-anchor: start;
+}
+
+#dataIcon {
+  fill: white;
+}
+
+#steps #dataCount {
+  font-family: Seville;
+  font-size: 60;
+  fill: lightblue;
+  font-weight: bold;
+  }
+
+#date {
+  font-family: Seville;
+  fill: yellow;
+  font-weight: bold;
+  font-size: 42;
+  text-anchor: start;
+  }
+
+#heartRate #hrm-data {
+  font-family: Seville-Bold;
+  fill: orange;
+  font-weight: bold;
+  font-size: 48;
+  }
