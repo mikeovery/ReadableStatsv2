@@ -1,24 +1,33 @@
 <svg>
+  <image id="bgImage" x="0" y="0" width="100%" height="100%" href="bgBlack.jpg" pointer-events="visible" />
+
   <!-- Battery -->
+  <g id="Batt">
   <rect id="battBox" x="10" y="0" class="item" fill="grey" width="280" height="10" />
   <rect id="battProgFill" x="12" y="2" class="item" fill="black" width="276" height="6" />
   <rect id="batteryLevelRed" x="12" y="2" height="6" />
   <rect id="batteryLevelAmber" x="40" y="2" height="6" />
   <rect id="batteryLevelGreen" x="68" y="2" height="6" />
+  </g>
+  <g id="AOD" display="none">
+  <text id="batChrg" class="baseSettings" x="155" y="270"/>
+  </g>
   
   <!-- Clock -->
-  <text id="clockTextH" class="clock-displayH" x="51" y="72">10</text>
+  <text id="clockTextH" class="clock-displayH" x="51" y="72" pointer-events="visible">10</text>
   <circle id="dot1" cx="103" cy="32" r="5" fill="white"/>
   <circle id="dot2" cx="103" cy="52" r="5" fill="white"/>
-  <text id="clockTextM" class="clock-displayM" x="160" y="72">00</text>
+  <text id="clockTextM" class="clock-displayM" x="160" y="72" pointer-events="visible">00</text>
+
+  <text id="date" class="baseSettings" x="3" y="115" />
+
+  <!-- Date -->
+  <g id="Data">
   <circle id="dot3" cx="218" cy="44" r="4" fill="khaki"/>
   <circle id="dot4" cx="218" cy="62" r="4" fill="khaki"/>
   <text id="clockTextS" class="clock-displayS" x="225" y="72">00</text>
   <circle id="amCircle" cx="2" cy="27" r="5" fill="yellow"/>
   <circle id="pmCircle" cx="2" cy="59" r="5" fill="orangered"/>
-  
-  <!-- Date -->
-  <text id="date" class="baseSettings" x="3" y="115" />
   
   <!--Heart Rate Data-->
   <g id="heartRate">
@@ -36,7 +45,7 @@
     <arc id="arcBack" x="5" y="170" width="65" height="65" fill="fb-extra-dark-gray" arc-width="3" start-angle="0" sweep-angle="360" />
     <arc id="arcFront" x="5" y="170" width="65" height="65" arc-width="3" fill="green" start-angle="0" sweep-angle="0" />
     <image id="dataIcon" href="icons/distOpen.png" width="24" height="24" x="26" y="143" fill="green" />
-    <text id="dataCount" class="smallFont" x="20" y="212" />
+    <text id="dataCount" class="smallFont" x="20" y="212" text-length="3" />
   </g>
   
   <!-- Calories -->
@@ -44,7 +53,7 @@
     <arc id="arcBack" x="80" y="170" width="65" height="65" fill="fb-extra-dark-gray" arc-width="3" start-angle="0" sweep-angle="360" />
     <arc id="arcFront" x="80" y="170" width="65" height="65" fill="orange" arc-width="3" start-angle="0" sweep-angle="0" />
     <image id="dataIcon" href="icons/calsOpen.png" width="24" height="24" x="101" y="143" fill="orange" />
-    <text id="dataCount" class="smallestFont" x="112" y="209" />
+    <text id="dataCount" class="smallestFont" x="112" y="209"  text-length="4" />
   </g>
     
   <!-- Stairs Climbed -->
@@ -52,7 +61,7 @@
     <arc id="arcBack" x="155" y="170" width="65" height="65" fill="fb-extra-dark-gray" arc-width="3" start-angle="0" sweep-angle="360" />
     <arc id="arcFront" x="155" y="170" width="65" height="65" fill="red" arc-width="3" start-angle="0" sweep-angle="0" />
     <image id="dataIcon" href="icons/floorsOpen.png" width="24" height="24" x="176" y="143" fill="red" />
-    <text id="dataCount" class="smallFont" x="170" y="212" />
+    <text id="dataCount" class="smallFont" x="170" y="212"  text-length="3" />
   </g>
   
   <!-- Active Minutes -->
@@ -60,14 +69,14 @@
     <arc id="arcBack" x="230" y="170" width="65" height="65" fill="fb-extra-dark-gray" arc-width="3" start-angle="0" sweep-angle="360" />
     <arc id="arcFront" x="230" y="170" width="65" height="65" fill="yellow" arc-width="3" start-angle="0" sweep-angle="0" />
     <image id="dataIcon" href="icons/amOpen.png" width="24" height="24" x="251" y="143" fill="yellow"/>
-    <text id="dataCount" class="smallFont" x="245" y="212" />
+    <text id="dataCount" class="smallFont" x="245" y="212"  text-length="3" />
   </g>
 
     <!-- Steps -->
   <g id="steps">
     <image id="dataIcon" href="icons/stepsOpen.png" width="40" height="40" x="16" y="100%-55" fill="lightblue"/>
-    <text id="dataCount" class="baseSettings" x="170" y="286" />
+    <text id="dataCount" class="baseSettings" x="170" y="286" text-length="5" />
   </g>
 
-  <rect id="clickbg" pointer-events="visible"/>
+  </g>
 </svg>

@@ -34,5 +34,5 @@ export function setLevel() {
   batDataR.style.fill = 'fb-red';
   batDataA.style.fill = 'fb-peach';
   batDataG.style.fill = 'fb-green';
-  
+  batChrg.text = charge + "%";
 }
