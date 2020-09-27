@@ -2,7 +2,7 @@
 
 [FitBit Studio](https://studio.fitbit.com/projects) Application Developed on FitBit Studio
 
-Versa Clock Face for Julie
+FitBit Versa and Versa 2 Clock Face for Julie
 
 
 ## Sample
