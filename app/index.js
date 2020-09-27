@@ -26,7 +26,7 @@ let Data         = document.getElementById("Data");
 let AOD          = document.getElementById("AOD");
 
 let dataTypes     = [ "steps", "distance", "calories",
-                      "elevationGain", "activeMinutes" ];
+                      "elevationGain", "activeZoneMinutes" ];
 let dataProgress  = [];
 let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -44,8 +44,10 @@ clockTextH.onclick = (e) => {
 }
 
 if ( display.aodAvailable) {
-  console.log(me.permissions.granted("access_aod"));
-  display.aodAllowed = true;
+  if ( display.aodEnabled) {
+    console.log(me.permissions.granted("access_aod"));
+    display.aodAllowed = true;
+  }
 }
 
 clockTextM.onclick = (e) => {
@@ -56,7 +58,6 @@ clockTextM.onclick = (e) => {
     console.log("aodActive: " + display.aodActive);
     console.log("aodAllowed: " + display.aodAllowed);
     console.log("aodEnabled: " + display.aodEnabled);   
-    console.log(Batt.style.display);
   }
 }
 
@@ -123,6 +124,11 @@ function refreshData(type) {
   
   let currentDataProg = (userActivity.today.adjusted[currentType] || 0);
   let currentDataGoal = userActivity.goals[currentType];
+  if (currentDataGoal.total != undefined)
+  {
+    currentDataProg = currentDataProg.total
+    currentDataGoal = currentDataGoal.total
+  }
   if (currentDataGoal == undefined)
   {
     currentDataGoal = 1;

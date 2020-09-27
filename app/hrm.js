@@ -30,7 +30,12 @@ function getReading() {
 function heartRateSetup() {
   display.addEventListener("change", function() {
     if (display.on) {
-      startReading();
+       if (display.aodActive == false) {
+        startReading();
+       } else {
+         stopReading();
+       }
+       
     } else {
       stopReading();
     }

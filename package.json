@@ -1,4 +1,7 @@
 {
+  "devDependencies": {
+    "@fitbit/sdk": "~4.2.0"
+  },
   "fitbit": {
     "appUUID": "201de6a9-655a-42d7-8255-1b78b92b43b3",
     "appType": "clockface",
@@ -9,21 +12,18 @@
       "access_activity",
       "access_heart_rate",
       "access_location",
-      "access_user_profile",
-      "access_aod"
+      "access_user_profile"
     ],
     "buildTargets": [
+      "gemini",
       "mira",
       "meson"
     ],
     "i18n": {
-      "en": {
+      "en-US": {
         "name": "Readable Stats v2"
       }
     },
     "defaultLanguage": "en-US"
-  },
-  "devDependencies": {
-    "@fitbit/sdk": "~4.1.0"
   }
 }
