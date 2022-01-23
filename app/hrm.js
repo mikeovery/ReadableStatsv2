@@ -1,5 +1,5 @@
 import { me } from "appbit";
-import document from "document";
+import * as document from "document";
 import { HeartRateSensor } from "heart-rate";
 import { display } from "display";
 

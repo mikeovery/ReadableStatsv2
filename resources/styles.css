@@ -15,6 +15,7 @@
 
 .smallFont {
   font-size: 28;
+  text-anchor: middle;
   font-family: Seville-Bold;
   fill: linen;
 }
