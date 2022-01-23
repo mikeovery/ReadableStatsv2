@@ -1,4 +1,4 @@
-import document from "document";
+import * as document from "document";
 import { battery } from "power";
 
 const batDataR = document.getElementById("batteryLevelRed");

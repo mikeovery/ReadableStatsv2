@@ -1,6 +1,6 @@
-import document from "document";
-import clock from "clock";
-import userActivity from "user-activity";
+import * as document from "document";
+import { clock } from "clock";
+import * as userActivity from "user-activity";
 import { display } from "display";
 import { preferences } from "user-settings";
 import { HeartRateSensor } from "heart-rate";
@@ -9,6 +9,8 @@ import * as heartMonitor from "./hrm";
 import * as util from "../common/utils";
 import { locale } from "user-settings";
 import { me } from "appbit";
+
+console.log (preferences.clockDisplay);
 
 // Set up all necessary variables
 let clockTextH   = document.getElementById("clockTextH");
@@ -119,27 +121,36 @@ for(var i=0; i < dataTypes.length; i++) {
 
 // Refresh data, all other logic is in separate files
 function refreshData(type) {
-  let currentType = type.dataType;
-  let dataValid = 1;
-  
-  let currentDataProg = (userActivity.today.adjusted[currentType] || 0);
-  let currentDataGoal = userActivity.goals[currentType];
-  if (currentDataGoal.total != undefined)
-  {
-    currentDataProg = currentDataProg.total
-    currentDataGoal = currentDataGoal.total
+  let currentType = "steps";
+  if (type) {
+    if (type.dataType) {
+      currentType = type.dataType;
+    }
   }
-  if (currentDataGoal == undefined)
-  {
+  let currentDataProg = currentDataProg = userActivity.today.adjusted[currentType];
+  if (currentDataProg) {
+    if (currentDataProg.total) {
+       currentDataProg = currentDataProg.total;
+    }
+  }
+  let currentDataGoal = currentDataGoal = userActivity.goals[currentType];
+  if (currentDataGoal) {
+    if (currentDataGoal.total) {
+       currentDataGoal = currentDataGoal.total;
+    }
+  }
+  if ((currentType==="elevationGain") && (currentDataGoal == undefined)) {
+      type.dataIcon.href = "icons/floorsBlank.png";
+      type.arcBack.style.fill = "black";
+      currentDataProg = "";
+  }
+  
+  if (currentDataGoal == undefined) {
     currentDataGoal = 1;
-    dataValid = 0;
   }
   
   let currentDataArc = (currentDataProg / currentDataGoal) * 360;
-  //currentDataArc = 90;
-  //console.log (currentType);
-  //console.log(currentDataProg);
-  //console.log(currentDataGoal);
+  //console.log (currentType + ":" + currentDataProg + ":" + currentDataGoal);
   if(currentType!="steps") {
     if (currentDataArc >= 360) {
       currentDataArc = 360;
@@ -149,26 +160,18 @@ function refreshData(type) {
     else {
       if(currentType==="distance") {
         type.arcFront.style.fill = "green";  
-        //currentDataProg = 2;
       }
       if(currentType==="calories") {
         type.arcFront.style.fill = "orange";
-        //currentDataProg = 100;
       }
       if(currentType==="elevationGain") {
         type.arcFront.style.fill = "red";
-        //currentDataProg = 5;
       }
-      if(currentType==="activeMinutes") {
+      if(currentType==="activeZoneMinutes") {
         type.arcFront.style.fill = "yellow";   
-        //currentDataProg = 10;
       }
     }
     type.arcFront.sweepAngle = currentDataArc;
-  }
-  else
-  { 
-    //currentDataProg = 3000;
   }
   
   if(currentType==="distance") {
@@ -180,33 +183,36 @@ function refreshData(type) {
       currentDataProg = `${currentDataProg}K`;
     }
   }
+  if(currentType==="activeZoneMinutes") {
+    if (currentDataProg < 99) {
+      type.dataCount.class = "smallFont";
+      type.dataCount.y = 242;
+    } else {
+      type.dataCount.class = "smallestFont";
+      type.dataCount.y = 239;
+    }
+  }
   if(currentType==="steps") {
     if (currentDataProg >= currentDataGoal) {
       if (currentDataProg >= (currentDataGoal * 2)) {
-        //currentDataProg = currentDataProg - userActivity.goals[currentType];
-        //currentDataProg = `+${currentDataProg}`;
         stepProg1.width = 276;
         stepProg2.width = 276;
         stepProg1.style.fill = "lightgreen";
         stepProg2.style.fill = "lightgreen";
         type.dataCount.style.fill = "lightgreen";
-      }
-      else {
+      } else {
         let currentDataProg1 = currentDataProg;
-        if (userActivity.goals[currentType] != undefined)
-        {
+        if (userActivity.goals[currentType] != undefined) {
           currentDataProg1 = currentDataProg1 - userActivity.goals[currentType];
         }
         
-        //currentDataProg = `+${currentDataProg}`;
         stepProg1.width = 276;
         stepProg2.width = (currentDataProg1 / currentDataGoal) * 276;
         stepProg1.style.fill = "lightgreen";
         stepProg2.style.fill = "lightblue";
         type.dataCount.style.fill = "lightgreen";   
       }
-    }
-    else {
+    } else {
       stepProg1.width = (currentDataProg / currentDataGoal) * 276;
       stepProg1.style.fill = "lightblue";
       stepProg2.width = (currentDataProg / currentDataGoal) * 276;
@@ -214,16 +220,7 @@ function refreshData(type) {
       type.dataCount.style.fill = "lightblue";
     }
   }
-  if (dataValid == 1)
-  {
-     //console.log(currentType + ": " + currentDataProg)
-     type.dataCount.text = currentDataProg;
-  }
-  else
-  {
-     type.dataCount.text = "";
-  }
-  //console.log (currentType);
+  type.dataCount.text = currentDataProg;
 }
 
 function refreshAllData() {
@@ -247,16 +244,20 @@ clock.ontick = evt => {
       clockTextH.style.fill = "white";
       clockTextM.style.fill = "white";
   }
-  
-  if (hours < 12) {
-    amCircle.style.fill = 'yellow';
-    pmCircle.style.fill = 'black';
+  if (preferences.clockDisplay == "12h") {
+    if (hours < 12) {
+      amCircle.style.fill = 'yellow';
+      pmCircle.style.fill = 'black';
+    } else {
+      amCircle.style.fill = 'black';
+      pmCircle.style.fill = 'orangered';
+    }
+    if (hours > 12) {hours -= 12;}
+    if (hours == 0) {hours = 12;}
   } else {
-    amCircle.style.fill = 'black';
-    pmCircle.style.fill = 'orangered';
-  }
-  if (hours > 12) {hours -= 12;}
-  if (hours == 0) {hours = 12;}
+      amCircle.style.fill = 'black';
+      pmCircle.style.fill = 'black';    
+  } 
   
   clockTextH.text = `${hours}`;
   clockTextM.text = `${mins}`;
